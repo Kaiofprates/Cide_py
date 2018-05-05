@@ -1,4 +1,4 @@
-#Author = Kaio Prates
+#Author = Los Guidos
 #encoding = utf-8
 
 import re
