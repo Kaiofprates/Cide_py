@@ -28,10 +28,10 @@ def salvar():
 	a.close
 
 def copilar():
-	os.system("gnome-terminal -- gcc -Wall arquivo.c -o arquivo")
-	os.system("gnome-terminal -- ./arquivo")
-	
-	
+	#os.system("gnome-terminal -- gcc -Wall arquivo.c -o arquivo") //Linux
+	#os.system("gnome-terminal -- ./arquivo") //Linux
+	#os.system("gcc -Wall arquivo.c") //Windows
+	#os.system("a.exe") //Windows
 
 def pseudocodigo():
 	y = texto.get(1.0, END)
