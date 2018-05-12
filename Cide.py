@@ -1,7 +1,9 @@
 __Author__ = "Kaio Fábio Prates"
 
 import os
-from translate_C import translate 
+import subprocess as sp
+from translate_C import translate
+from error_func import error
 from tkinter import *
 from tkinter import filedialog
 
@@ -20,7 +22,7 @@ def escolha():
 	listFiles = file.readlines()
 	for i in listFiles[:]:
 		texto.insert(INSERT,i)
-	
+
 def salvar():
 	a = open("arquivo.c","w")
 	y = texto.get(1.0, END)
@@ -28,8 +30,14 @@ def salvar():
 	a.close
 
 def copilar():
-	#os.system("gnome-terminal -- gcc -Wall arquivo.c -o arquivo") //Linux
-	#os.system("gnome-terminal -- ./arquivo") //Linux
+	salvar()
+	page,status = sp.getstatusoutput("gcc -Wall arquivo.c -o arquivo")
+	print(page)
+	print(status)
+	if (page == 1):
+		error(status)
+	else:
+		os.system("gnome-terminal -- ./arquivo")
 	#os.system("gcc -Wall arquivo.c") //Windows
 	#os.system("a.exe") //Windows
 
@@ -59,11 +67,9 @@ texto.tag_config("a", foreground="blue", underline=1)
 texto.config(cursor="arrow")
 texto.place(x = 55, y =60)
 
-bot1 = Button(tela,text = "salvar",bg = '#4B0082', fg = 'white', command = salvar)
+bot1 = Button(tela,text = "salvar",bg = '#4B0082', fg = 'white', command = copilar)
 bot1.place(x = 150, y = 20)
 
-bot2 = Button(tela,text = "copilar",bg = '#4B0082', fg = 'white', command = copilar)
-bot2.place(x = 250, y = 20)
 
 bot3 = Button(tela,text = "Pseu",height = 2, width = 1, bg = '#4B0082', fg = 'black', command = pseudocodigo)
 bot3.place(x = 5, y = 60)
@@ -73,7 +79,6 @@ bot4.place(x = 5, y = 100)
 
 bot = Button(tela,text = "Pesquisar",bg = '#4B0082', fg = 'white', command = escolha)
 bot.place(x = 30, y = 20)
-
 
 
 
